@@ -342,6 +342,20 @@ catch(error){
   console.log(error.message);
  }
 
+//  Q26 Write a JavaScript function that takes a string as a parameter and throws a custom 'Error' if the string is empty.
+function empty(str){
+  if(str.length === 0){
+    throw new Error("String is empty");
+  }
+}
+try{
+  console.log(empty(""));
+}
+catch(error){
+  console.log(error.message);
+
+}
+
     </script>
   </body>
 </html>
