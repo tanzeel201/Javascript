@@ -515,6 +515,287 @@
         return matrix;
       }
       console.log(isMatrix(4));
+
+      //Q41 Write a JavaScript function that checks whether a number is perfect.
+
+      function isPerfectNumber(number) {
+        if (number <= 0) {
+          return false;
+        }
+
+        let sum = 0;
+
+        for (let i = 1; i <= Math.sqrt(number); i++) {
+          if (number % i === 0) {
+            sum += i;
+            if (i !== 1 && i !== number / i) {
+              sum += number / i;
+            }
+          }
+        }
+
+        return sum === number;
+      }
+
+      console.log(isPerfectNumber(28));
+
+      // Q42 Write a JavaScript function to compute the factors of a positive integer.
+      function Factor(num) {
+        if (num <= 0) {
+          return [];
+        }
+        const factor = [];
+        for (i = 1; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) {
+            factor.push(i);
+            if (i !== num / i) {
+              factor.push(num / i);
+            }
+          }
+        }
+        return factor.sort((a, b) => a - b);
+      }
+      console.log(Factor(10));
+
+      // Q43 Write a JavaScript function to convert an amount into coins.
+      function convertCoin(amount, coins) {
+        if (amount <= 0) {
+          return [];
+        }
+        coins.sort((a, b) => b - a);
+        const result = [];
+        for (i = 0; i < coins.length; i++) {
+          while (amount >= coins[i]) {
+            result.push(coins[i]);
+            amount -= coins[i];
+          }
+        }
+        return result;
+      }
+      console.log(convertCoin(46, [25, 10, 5, 2, 1]));
+
+      // Q44 Write a JavaScript function to compute the value of bn where n is the exponent and b is the base. Accept b and n from the user and display the results.
+      function Exp(b, n) {
+        let result = 1;
+        if (n < 0) {
+          b = 1 / base;
+          n = -n;
+        }
+        for (let i = 0; i < n; i++) {
+          result *= b;
+        }
+        return result;
+      }
+      console.log(Exp(2, 2));
+
+      // Q45 Write a JavaScript function to extract unique characters from a string.
+      function extractUniqueCharacters(str) {
+        const uniqueCharacters = new Set();
+
+        for (let char of str) {
+          uniqueCharacters.add(char);
+        }
+
+        return Array.from(uniqueCharacters);
+      }
+
+      console.log(extractUniqueCharacters("hello"));
+
+      // Q46 Write a JavaScript function to get the number of occurrences of each letter in a specified string.
+      function countOccurrences(str) {
+        const letterCount = {};
+
+        for (let char of str) {
+          if (/[a-zA-Z]/.test(char)) {
+            char = char.toLowerCase();
+
+            letterCount[char] = (letterCount[char] || 0) + 1;
+          }
+        }
+
+        return letterCount;
+      }
+      console.log(countOccurrences("Hello, world!"));
+
+      // Q47 Write a function for searching JavaScript arrays with binary searches.
+      function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+
+        if (arr[mid] === target) {
+            return mid;
+        }
+        if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+const sortedArray = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91];
+console.log(binarySearch(sortedArray, 23)); 
+
+// Q48 Write a JavaScript function that returns array elements larger than a number.
+
+function getElementsLargerThan(arr, number) {
+    return arr.filter(element => element > number);
+}
+const numbers = [5, 10, 15, 20, 25];
+const threshold = 15;
+console.log(getElementsLargerThan(numbers, threshold)); 
+
+// Q49 Write a JavaScript function that generates a string ID (specified length) of random characters.
+function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+
+    return result;
+}
+console.log(generateRandomString(8));
+
+// Q50 Write a JavaScript function to get all possible subsets with a fixed length (for example 2) combinations in an array.
+
+function getCombinations(arr, k) {
+    const result = [];
+
+    function generateCombinations(combination, start) {
+        if (combination.length === k) {
+            result.push(combination.slice());
+            return;
+        }
+
+        for (let i = start; i < arr.length; i++) {
+            combination.push(arr[i]); 
+            generateCombinations(combination, i + 1); 
+            combination.pop(); 
+        }
+    }
+    generateCombinations([], 0); 
+    return result;
+}
+
+const array = [1, 2, 3, 4];
+const k = 2;
+console.log(getCombinations(array, k)); 
+
+// Q51 Write a JavaScript function that accepts two arguments, a string and a letter and the function will count the number of occurrences of the specified letter within the string.
+function countOccurrences(str, letter) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+      
+        if (str[i] === letter) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+const string = "Hello, world!";
+const letter = "o";
+console.log(countOccurrences(string, letter));
+
+
+
+// Q52 Write a JavaScript function to find the first not repeated character.
+function findFirstNonRepeatedCharacter(str) {
+    const charCount = {};
+    for (let char of str) {
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+    for (let char of str) {
+        if (charCount[char] === 1) {
+            return char;
+        }
+    }
+    return null;
+}
+
+console.log(findFirstNonRepeatedCharacter("hello")); 
+
+// Q52 Write a JavaScript function to apply the Bubble Sort algorithm.
+function bubbleSort(arr){
+  let n = arr.length;
+
+  for(let i = 0; i < n-1; i++) {
+    for(j = 0; j < n-i-1; j++){
+      if(arr[j] >arr[j+1]){
+        let temp = arr[j];
+        arr[j] = arr[j+1];
+        arr[j+1] = temp;
+      }
+    }
+
+  }
+  return arr;
+
+}
+console.log(bubbleSort([56,33,90,14,2]));
+
+// Q53 Write a JavaScript function that accepts a list of country names as input and returns the longest country name as output
+function findCountryName(countryName){
+  let longestName = '';
+  for(let country of countryName){
+    if(country.length > longestName.length){
+        longestName = country;
+
+    }
+  }
+  return longestName;
+
+}
+console.log(findCountryName(['India', 'United States of America', 'China', 'United Arab Emirates', 'United Kingdom']));
+
+// Q54 Write a JavaScript function to find the longest substring in a given string without repeating characters.
+
+function longestSubstringWithoutRepeating(str) {
+    let longestSubstring = '';
+    let currentSubstring = '';
+    const charIndexMap = {};
+
+    let start = 0;
+
+    for (let end = 0; end < str.length; end++) {
+        const char = str[end];
+
+        if (charIndexMap[char] !== undefined && charIndexMap[char] >= start) {
+            
+            start = charIndexMap[char] + 1;
+        }
+
+        charIndexMap[char] = end;
+
+        currentSubstring = str.substring(start, end + 1);
+
+        if (currentSubstring.length > longestSubstring.length) {
+            longestSubstring = currentSubstring;
+        }
+    }
+
+    return longestSubstring;
+}
+
+const str = "abcabcbb";
+console.log(longestSubstringWithoutRepeating(str));
+
+
+
+
+
+
+
+
+
     </script>
   </body>
 </html>
