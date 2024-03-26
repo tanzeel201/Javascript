@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-
+// Q55  Write a JavaScript function that returns the longest palindrome in a given string.
 function longestPalindrome(str) {
    
     function isPalindrome(s) {
@@ -28,7 +28,465 @@ function longestPalindrome(str) {
 
 
 const inputString = "babad";
-console.log(longestPalindrome(inputString)); // Output: "bab" or "aba"
+console.log(longestPalindrome(inputString));
+
+
+
+// RECURSION QUESTIONS
+
+// Q56 Write a JavaScript program to calculate the factorial of a number.
+
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+const num = 5;
+console.log("Factorial of", num, "is", factorial(num)); 
+
+
+// Q56  Write a JavaScript program to find the greatest common divisor (GCD) of two positive numbers using recursion
+
+function gcd(a, b) {
+    if (b === 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+const num1 = 48;
+const num2 = 18;
+console.log("GCD of", num1, "and", num2, "is", gcd(num1, num2)); 
+
+// Q57 Write a JavaScript program to get integers in the range (x, y) using recursion
+function getIntegersInRange(x, y) {
+    if (x >= y - 1) {
+        return [];
+    } else {
+        return [x + 1, ...getIntegersInRange(x + 1, y)];
+    }
+}
+
+const start = 3;
+const end = 8;
+console.log("Integers in the range (" + start + ", " + end + "):", getIntegersInRange(start, end)); 
+
+// Q58 Write a JavaScript program to compute the sum of an array of integers.
+function sumArray(arr) {
+    if (arr.length === 0) {
+        return 0;
+    } else {
+        return arr[0] + sumArray(arr.slice(1));
+    }
+}
+
+const numbers = [1, 2, 3, 4, 5];
+console.log("Sum of the array:", sumArray(numbers)); 
+
+// Q59 Write a JavaScript program to compute the exponent of a number. 
+function mergeSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+
+    const middle = Math.floor(arr.length / 2);
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle);
+
+    const sortedLeft = mergeSort(left);
+    const sortedRight = mergeSort(right);
+
+    return merge(sortedLeft, sortedRight);
+}
+
+function merge(left, right) {
+    let result = [];
+    let leftIndex = 0;
+    let rightIndex = 0;
+    while (leftIndex < left.length && rightIndex < right.length) {
+        if (left[leftIndex] < right[rightIndex]) {
+            result.push(left[leftIndex]);
+            leftIndex++;
+        } else {
+            result.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+
+    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+
+const array = [8, 3, 6, 2, 7, 1, 4, 5];
+console.log("Original array:", array);
+const sortedArray = mergeSort(array);
+console.log("Sorted array:", sortedArray);
+
+// 60 Write a JavaScript program to search for a given integer in an array of sorted integers using the Binary Search Algorithm and recursion.
+function binarySearch(arr, target, left = 0, right = arr.length - 1) {
+    if (left > right) {
+        return -1;
+    }
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) {
+        return mid;
+    }
+
+    else if (target < arr[mid]) {
+        return binarySearch(arr, target, left, mid - 1);
+    }
+    else {
+        return binarySearch(arr, target, mid + 1, right);
+    }
+}
+
+const index = binarySearch([1, 3, 5, 7, 9, 11, 13, 15, 17, 19], 11);
+
+
+// Q61 Write a JavaScript program that displays the largest integer among two integers.
+function findLargestInteger(num1, num2) {
+    if (num1 > num2) {
+        return num1;
+    } else {
+        return num2;
+    }
+}
+const largestInteger = findLargestInteger(10, 20);
+console.log("The largest integer is:", largestInteger);
+
+// Q62 Write a JavaScript conditional statement to find the sign of the product of three numbers. Display an alert box with the specified sign.
+
+// Function to find the sign of the product of three numbers
+function findProductSign(num1, num2, num3) {
+    const product = num1 * num2 * num3;
+
+
+    if (product > 0) {
+        alert("The product of the three numbers is positive.");
+    } else if (product < 0) {
+        alert("The product of the three numbers is negative.");
+    } else {
+        alert("The product of the three numbers is zero.");
+    }
+}
+console.log( findProductSign(1, -3, 4));
+
+// Q63  Write a JavaScript conditional statement to sort three numbers. Display an alert box to show the results
+
+function sortThreeNumbers(num1, num2, num3) {
+    let sortedNumbers;
+    if (num1 <= num2 && num1 <= num3) {
+        if (num2 <= num3) {
+            sortedNumbers = [num1, num2, num3];
+        } else {
+            sortedNumbers = [num1, num3, num2];
+        }
+    } else if (num2 <= num1 && num2 <= num3) {
+        if (num1 <= num3) {
+            sortedNumbers = [num2, num1, num3];
+        } else {
+            sortedNumbers = [num2, num3, num1];
+        }
+    } else {
+        if (num1 <= num2) {
+            sortedNumbers = [num3, num1, num2];
+        } else {
+            sortedNumbers = [num3, num2, num1];
+        }
+    }
+
+    alert("The sorted numbers are: " + sortedNumbers.join(", "));
+}
+
+
+sortThreeNumbers(10, -5, 3);
+
+// Q64 Write a JavaScript program that iterates integers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for multiples of five print "Buzz". For numbers multiples of both three and five print "FizzBuzz".
+
+for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        console.log("FizzBuzz");
+    } 
+    else if (i % 3 === 0) {
+        console.log("Fizz");
+    } 
+    else if (i % 5 === 0) {
+        console.log("Buzz");
+    } 
+    else {
+        console.log(i);
+    }
+}
+
+// Q65  Write a JavaScript program to find the Armstrong numbers of 3 digits.
+function isArmstrong(number) {
+    const numString = number.toString();
+    const numDigits = numString.length;
+    let sum = 0;
+
+    for (let i = 0; i < numDigits; i++) {
+        sum += Math.pow(parseInt(numString[i]), numDigits);
+    }
+
+    return sum === number;
+}
+
+function findArmstrongNumbers() {
+    const armstrongNumbers = [];
+    for (let i = 100; i < 1000; i++) {
+        if (isArmstrong(i)) {
+            armstrongNumbers.push(i);
+        }
+    }
+    return armstrongNumbers;
+}
+const armstrongNumbers = findArmstrongNumbers();
+console.log("Armstrong numbers of 3 digits:", armstrongNumbers);
+
+// Q66 Write a JavaScript program to construct the following pattern, using a nested for loop
+
+const numRows = 5;
+
+for (let i = 1; i <= numRows; i++) {
+    let pattern = '';
+    for (let j = 1; j <= i; j++) {
+        pattern += '* ';
+    }
+    console.log(pattern);
+}
+
+// Q67 Write a JavaScript program to sum 3 and 5 multiples under 1000
+function sumMultiples() {
+    let sum = 0;
+    for (let i = 1; i < 1000; i++) {
+        if (i % 3 === 0 || i % 5 === 0) {
+            sum += i;
+        }
+    }
+
+    return sum;
+}
+
+const result = sumMultiples();
+console.log("The sum of multiples of 3 and 5 under 1000 is:", result);
+
+
+
+// Q68 Write a JavaScript function that takes a callback and invokes it after a delay of 2 second.
+function invokeAfterDelay(callback) {
+    setTimeout(callback, 2000);
+}
+function myCallback() {
+    console.log("Callback function invoked after 2 seconds");
+}
+
+invokeAfterDelay(myCallback);
+
+
+
+// BASIC
+
+// Q69 Write a JavaScript program that evaluates three given integers to determine if any one of them is greater than or equal to 20 and less than at least one of the other two. 
+function checkConditions(num1, num2, num3) {
+    
+    if ((num1 >= 20 && num1 < num2 && num1 < num3) ||
+        (num2 >= 20 && num2 < num1 && num2 < num3) ||
+        (num3 >= 20 && num3 < num1 && num3 < num2)) {
+        return true; 
+    } else {
+        return false; 
+    }
+}
+console.log(checkConditions(15, 25, 30)); 
+
+// Q70 Write a JavaScript program that checks two integer values and returns true if either one is 15 or if their sum or difference is 15. 
+
+function checkValues(num1, num2) {
+    if (num1 === 15 || num2 === 15) {
+        return true;
+    }
+
+    if (num1 + num2 === 15 || Math.abs(num1 - num2) === 15) {
+        return true;
+    }
+    
+    return false;
+}
+console.log(checkValues(10, 5)); 
+
+// Q71  Write a JavaScript program to check two given non-negative integers if one (not both) is a multiple of 7 or 11.
+function checkMultiples(num1, num2) {
+    const isMultipleOf7Or11 = (num) => num % 7 === 0 || num % 11 === 0;
+
+    const isNum1Multiple = isMultipleOf7Or11(num1);
+    const isNum2Multiple = isMultipleOf7Or11(num2);
+
+    return (isNum1Multiple && !isNum2Multiple) || (!isNum1Multiple && isNum2Multiple);
+}
+console.log(checkMultiples(14, 21));
+
+// Q72 Write a JavaScript program to check whether a given number exists in the range 40..10000.  
+function checkInRange(number) {
+    return number >= 40 && number <= 10000;
+}
+const numberToCheck = 4000;
+if (checkInRange(numberToCheck)) {
+    console.log(numberToCheck + " exists in the range from 40 to 10000");
+} else {
+    console.log(numberToCheck + " does not exist in the range from 40 to 10000");
+}
+
+// Q73 Write a JavaScript program to replace every character in a given string with the character following it in the alphabet.  
+
+function replaceWithNextCharacter(str) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+        let charCode = str.charCodeAt(i);
+        if (charCode >= 65 && charCode <= 90) { 
+            charCode = (charCode - 65 + 1) % 26 + 65;
+        } else if (charCode >= 97 && charCode <= 122) { 
+            charCode = (charCode - 97 + 1) % 26 + 97;
+        }
+        result += String.fromCharCode(charCode);
+    }
+    return result;
+}
+
+console.log(replaceWithNextCharacter("Hello World!"));
+
+// Q74  Write a JavaScript program to create an updated string of 4 copies of the last 3 characters of a given original string. The string length must be 3 and above.  
+
+function createUpdatedString(originalString) {
+    if (originalString.length >= 3) {
+        const lastThreeCharacters = originalString.slice(-3);
+        
+        const updatedString = lastThreeCharacters.repeat(4);
+        return updatedString;
+    } else {
+        return "Original string length must be 3 or above.";
+    }
+}
+console.log(createUpdatedString("Hello World")); 
+
+// Q75 Write a JavaScript program to display the city name if the string begins with "Los" or "New" otherwise return blank
+function getCityName(str) {
+    if (str.startsWith("Los")) {
+        return "Los Angeles";
+    } else if (str.startsWith("New")) {
+        return "New York";
+    } else {
+        return "";
+    }
+}
+
+console.log(getCityName("Los Angeles")); 
+
+// Q76 Write a JavaScript program to create a new string using the first and last n characters from a given string. The string length must be larger than or equal to n.
+function createNewString(str, n) {
+    if (str.length >= n) {
+        const firstChars = str.slice(0, n);
+        const lastChars = str.slice(-n);
+        const newString = firstChars + lastChars;
+        return newString;
+    } else {
+        return "String length must be larger than or equal to n.";
+    }
+}
+console.log(createNewString("Hello World", 3));
+
+// Q77 Write a JavaScript program to compute the sum of three elements of a given array of integers of length 3.
+function computeSum(arr) {
+    if (arr.length === 3) {
+        const sum = arr[0] + arr[1] + arr[2];
+        return sum;
+    } else {
+        return "Array length must be 3.";
+    }
+}
+console.log(computeSum([1, 2, 3]));
+
+// Q78 Write a JavaScript program to rotate the elements left in a given array of integers of length 3.
+function rotateLeft(arr) {
+    
+    if (arr.length === 3) {
+        const rotatedArray = [arr[1], arr[2], arr[0]];
+        return rotatedArray;
+    } else {
+        return "Array length must be 3.";
+    }
+}
+console.log(rotateLeft([1, 2, 3]));
+
+// Q 79 Write a JavaScript program to check whether 1 appears in the first or last position of a given array of integers. The array length must be larger than or equal to 1.
+function checkAppearance(arr) {
+    if (arr.length >= 1) {
+        if (arr[0] === 1 || arr[arr.length - 1] === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return "Array length must be larger than or equal to 1.";
+    }
+}
+console.log(checkAppearance([1, 2, 3]));
+
+// Q80 Write a JavaScript program to check whether the first and last elements are the same in a given array of integers of length 3.  
+function checkFirstLastEquality(arr) {
+    if (arr.length === 3) {
+        if (arr[0] === arr[2]) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return "Array length must be 3.";
+    }
+}
+console.log( checkFirstLastEquality([1, 2, 1]));
+
+// Q81 Write a JavaScript program to reverse the elements of a given array of integers of length 3
+function reverseArray(arr) {
+
+    if (arr.length === 3) {
+        const temp = arr[0];
+        arr[0] = arr[2];
+        arr[2] = temp;
+        return arr;
+    } else {
+        return "Array length must be 3.";
+    }
+}
+console.log(reverseArray([1, 2, 3]));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </script>
