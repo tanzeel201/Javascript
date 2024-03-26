@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+function longestPalindrome(str) {
+   
+    function isPalindrome(s) {
+        return s === s.split('').reverse().join('');
+    }
+
+    let longest = '';
+    for (let i = 0; i < str.length; i++) {
+        for (let j = i + 1; j <= str.length; j++) {
+            let substring = str.slice(i, j);
+            if (isPalindrome(substring) && substring.length > longest.length) {
+                longest = substring;
+            }
+        }
+    }
+    return longest;
+}
+
+
+const inputString = "babad";
+console.log(longestPalindrome(inputString)); // Output: "bab" or "aba"
+
+
+    </script>
+    
+</body>
+</html>
